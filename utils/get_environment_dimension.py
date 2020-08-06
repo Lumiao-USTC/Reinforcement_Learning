@@ -7,7 +7,7 @@ def get_dimension(space):
     elif isinstance(space, Discrete):
         return space.n
     elif isinstance(space, Tuple):
-        return sum(get_dim(subspace) for subspace in space.spaces)
+        return sum(get_dimension(subspace) for subspace in space.spaces)
     elif hasattr(space, 'flat_dim'):
         return space.flat_dim
     else:

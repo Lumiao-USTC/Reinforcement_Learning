@@ -45,3 +45,4 @@ class basic_algorithm(object):
     @abc.abstractmethod
     def train_mode(self, mode):
         pass
+

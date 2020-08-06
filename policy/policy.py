@@ -1,7 +1,7 @@
 import abc
 
 
-class basic_policy(object):
+class basicPolicy(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod

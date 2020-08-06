@@ -31,7 +31,6 @@ def interact(
     if render:
         environment.render(**render_kwargs)
         print('__render__')
-        #time.sleep()
     while current_path_length < max_path_length:
         action, policy_info = policy.get_action(observation)
         next_observation, reward, terminal, environment_info = environment.step(action)
@@ -44,8 +43,8 @@ def interact(
         current_path_length += 1
         if render:
             environment.render(**render_kwargs)
-            print('__render__', reward, terminal, current_path_length)
-            #time.sleep(0.2)
+            time.sleep(0)
+            print('__render__', action, reward, terminal, current_path_length)
         if terminal:
             break
         observation = next_observation
@@ -67,9 +66,3 @@ def interact(
         policy_infos=policy_infos,
         environment_infos=environment_infos
     )
-
-
-
-
-
-

@@ -1,15 +1,14 @@
-import numpy as np
-from collections import deque, OrderedDict
+from collections import deque
 from collector.data_collector.data_collector import basic_data_collector
 from collector.interactor import interact
 
 
-class data_collector_paths(basic_data_collector):
+class dataCollectorPaths(basic_data_collector):
     def __init__(self,
                  environment,
                  policy,
                  size_of_collector=None,
-                 render=False,
+                 render=True,
                  render_kwargs=None
                  ):
         self.environment = environment
@@ -51,9 +50,9 @@ class data_collector_paths(basic_data_collector):
 
     def get_data(self, include_policy_infos=False):
         if not include_policy_infos:
-            data_without_policy_infos = deque(maxlen=self.size_of_collector)
-            for _ in self.num_paths_in_collector:
-                data_without_policy_infos.extend(
+            data_without_policy_infos = list()
+            for _ in range(self.num_paths_in_collector):
+                data_without_policy_infos.append(
                     dict(
                         observations=self.collector[_]['observations'],
                         actions=self.collector[_]['actions'],

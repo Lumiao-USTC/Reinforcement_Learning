@@ -22,8 +22,8 @@ def merge_paths_to_steps(paths, num_paths, include_policy_infos):
                                        paths[_]['next_observations']))
         terminals = np.vstack((terminals, paths[_]['terminals']))
         if include_policy_infos:
-            policy_infos.append(paths[_]['policy_infos'])
-        environment_infos.append(paths[_]['environment_infos'])
+            policy_infos += paths[_]['policy_infos']
+        environment_infos += paths[_]['environment_infos']
 
     steps['observations'] = observations
     steps['actions'] = actions
