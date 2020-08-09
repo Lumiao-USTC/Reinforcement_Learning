@@ -5,12 +5,7 @@ class basicPolicy(object):
     __metaclass__ = abc.ABCMeta
 
     @abc.abstractmethod
-    def get_action(self, observation):
-        """
-        Basic policy class
-        :param observation
-        :return: action, dictionary
-        """
+    def get_action(self, observation, **kwargs):
         pass
 
     def reset(self):

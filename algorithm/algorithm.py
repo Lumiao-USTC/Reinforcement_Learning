@@ -5,28 +5,17 @@ class basic_algorithm(object):
     __metaclass__ = abc.ABCMeta
 
     def __init__(self,
-                 evaluation_environment,
-                 exploration_environment,
-                 evaluation_collector,
-                 exploration_collector,
-                 replay_buffer,
+                 agent,
                  num_exploration_step_before_first_epoch,
-                 num_epoch,
                  start_epoch,
-                 num_evaluation_step_per_epoch,
-                 num_train_loop_per_epoch,
-                 trainer):
-        self.evaluation_environment = evaluation_environment
-        self.exploration_environment = exploration_environment
-        self.evaluation_collector = evaluation_collector
-        self.exploration_collector = exploration_collector
-        self.replay_buffer = replay_buffer
+                 num_epoch,
+                 num_train_loop_per_epoch
+                 ):
+        self.agent = agent
         self.num_exploration_step_before_first_epoch = num_exploration_step_before_first_epoch
-        self.num_epoch = num_epoch
-        self.num_evaluation_step_per_epoch = num_evaluation_step_per_epoch
-        self.num_train_loop_per_epoch = num_train_loop_per_epoch
-        self.trainer = trainer
         self.start_epoch = start_epoch
+        self.num_epoch = num_epoch
+        self.num_train_loop_per_epoch = num_train_loop_per_epoch
 
     @abc.abstractmethod
     def going_through_epochs_and_training(self):
@@ -36,9 +25,10 @@ class basic_algorithm(object):
         pass
 
     @abc.abstractmethod
-    def end_epoch(self):
+    def end_epoch(self, current_epoch):
         """
-        Saving data generated in the epoch, then initiate new collectors
+        Saving data generated in the epoch, initiating new collectors
+        Updating agent's hyperparameters
         """
         pass
 

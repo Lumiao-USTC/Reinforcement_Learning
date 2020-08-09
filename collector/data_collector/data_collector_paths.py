@@ -22,8 +22,7 @@ class dataCollectorPaths(basic_data_collector):
 
     def collect_data(self, num_collect_steps, max_path_length):
         """
-        This function collects path data with given step numbers. The return will be a list of steps. Also,
-        the list will be append to the collector.
+        This function collects path data with given step numbers. The list will be append to the collector.
         :param num_collect_steps: number of steps to be collected.
         :param max_path_length: w.r.t. function "interact", which sets the maximal length of a single path.
         """

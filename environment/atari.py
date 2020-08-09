@@ -168,7 +168,7 @@ class FrameStack(gym.Wrapper):
 
     def _get_ob(self):
         assert len(self.frames) == self.k
-        return LazyFrames(list(self.frames)).__array__().transpose(2, 0, 1)/255
+        return LazyFrames(list(self.frames)).__array__().transpose(2, 0, 1)
 
 
 class ScaledFloatFrame(gym.ObservationWrapper):
@@ -184,7 +184,7 @@ class LazyFrames(object):
         This object ensures that common frames between the observations are only stored once.
         It exists purely to optimize memory usage which can be huge for DQN's 1M frames replay
         buffers.
-        This object should only be converted to numpy array before being passed to the model.
+        This object should only be converted to numpy array before being passed to the agent.
         You'd not believe how complex the previous solution was.
         """
         self._frames = frames
@@ -214,7 +214,7 @@ class ImageToPyTorch(gym.ObservationWrapper):
 def make_atari(env_id):
     env = gym.make(env_id)
     assert 'NoFrameskip' in env.spec.id
-    env = NoopResetEnv(env, noop_max=30)
+    # env = NoopResetEnv(env, noop_max=30)
     env = MaxAndSkipEnv(env, skip=4)
     return env
 

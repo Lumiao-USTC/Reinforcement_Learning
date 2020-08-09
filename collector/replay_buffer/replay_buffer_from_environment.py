@@ -47,7 +47,7 @@ class replayBufferFromEnv(basic_replay_buffer):
         else:
             new_action = action
         self.observations[self.next_add_position] = observation
-        self.actions[self.next_add_position] = action
+        self.actions[self.next_add_position] = new_action
         self.rewards[self.next_add_position] = reward
         self.next_observations[self.next_add_position] = next_observation
         self.terminals[self.next_add_position] = terminal

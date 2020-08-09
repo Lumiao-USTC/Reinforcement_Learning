@@ -21,7 +21,7 @@ class cNN(nn.Module):
             hidden_sizes=None,
             batch_norm_conv=False,
             batch_norm_fc=False,
-            init_w=1e-4,
+            init_w=1e-2,
             hidden_init=nn.init.xavier_uniform_,
             hidden_activation=nn.ReLU(),
             output_activation=identity,

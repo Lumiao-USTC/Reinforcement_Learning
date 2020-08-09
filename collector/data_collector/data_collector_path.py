@@ -34,10 +34,10 @@ class dataCollectorPath(basic_data_collector):
                     )
         return self.path
 
-    def get_path_reward(self, discount_factor):
+    def get_path_reward(self):
         reward = 0
         path_length = len(self.path['actions'])
         print(path_length)
         for _ in range(path_length):
-            reward += self.path['rewards'][_] * np.power(discount_factor, _)
+            reward += self.path['rewards'][_]
         return reward

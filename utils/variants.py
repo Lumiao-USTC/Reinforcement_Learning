@@ -15,27 +15,31 @@ def network_architecture(environment_id, model):
         )
 
 
-def trainer_parameters(trainer_id):
-    if trainer_id == 'dqn_trainer':
+def parameters(agent_id, algorithm_id):
+    if agent_id == 'dqn' and algorithm_id == 'batch_algorithm':
         return dict(
-            discount_factor=0.99,
-            learning_rate=0.01,
-            target_q_update_period=1,
-            target_update_tau=2e-3
+            agent_parameters=dict(
+                discount_factor=0.99,
+                replay_buffer_size=int(1E5),
+                epsilon=dict(
+                    initial=1,
+                    final=0.1,
+                    decay=0.995
+                ),
+                trainer_parameters=dict(
+                    discount_factor=0.99,
+                    learning_rate=0.001,
+                    target_q_update_period=1,
+                    target_update_tau=2e-3
+                ),
+            ),
+            algorithm_parameters=dict(
+                num_exploration_step_before_first_epoch=1000,
+                num_epoch=3000,
+                num_train_loop_per_epoch=500,
+                num_exploration_step_per_train_loop=1,
+                num_train_step_per_train_loop=1,
+                batch_size=64,
+                max_path_length=1000,
+            )
         )
-
-
-def algorithm_parameters(algorithm_id):
-    if algorithm_id == 'batch_algorithm':
-        return dict(
-            num_exploration_step_before_first_epoch=1000,
-            num_epoch=3000,
-            num_evaluation_step_per_epoch=1000,
-            num_train_loop_per_epoch=1,
-            num_exploration_step_per_train_loop=2000,
-            num_train_step_per_train_loop=200,
-            batch_size=16,
-            max_path_length=1000,
-            discount_factor=0.99
-        )
-

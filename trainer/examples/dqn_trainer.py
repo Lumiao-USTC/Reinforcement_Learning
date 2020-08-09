@@ -33,20 +33,31 @@ class dqnTrainer(basic_trainer):
         next_observations = train_data['next_observations']
         terminals = train_data['terminals']
 
+        # print(self.target_q_function.forward(
+        #    torch.from_numpy(next_observations).float()).detach())
         target_q_value = self.target_q_function.forward(
             torch.from_numpy(next_observations).float()).detach().max(1, keepdim=True)[0]
         y_label = torch.from_numpy(rewards).detach() + \
                   torch.tensor(self.discount_factor).detach() * torch.from_numpy(1-terminals).detach() * target_q_value
+        # print("label", y_label)
+
+        # print(self.online_q_function.forward(
+        #    torch.from_numpy(observations).float()))
         y_predict = torch.sum(self.online_q_function.forward(
             torch.from_numpy(observations).float()) * torch.from_numpy(actions).detach(), 1, keepdim=True)
-        loss = self.loss_criterion.forward(y_predict, y_label)
+        # print("predict", y_predict)
 
+        loss = self.loss_criterion.forward(y_predict, y_label)
+        # print(loss)
         self.optimizer.zero_grad()
         loss.backward()
+        # for params in self.online_q_function.parameters():
+        #     print(params)
         self.optimizer.step()
         # for params in self.online_q_function.parameters():
         #     print(params)
         self.current_train_step += 1
+
 
         # update target_q_function
         if self.current_train_step % self.target_q_update_period == 0:
