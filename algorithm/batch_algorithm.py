@@ -12,9 +12,9 @@ class batch_algorithm(basic_algorithm):
                  ):
         super().__init__(
             agent,
+            algorithm_parameters['num_exploration_step_before_first_epoch'],
             start_epoch,
             algorithm_parameters['num_epoch'],
-            algorithm_parameters['num_evaluation_step_per_epoch'],
             algorithm_parameters['num_train_loop_per_epoch'],
         )
         self.num_exploration_step_per_train_loop = algorithm_parameters['num_exploration_step_per_train_loop']
@@ -26,7 +26,6 @@ class batch_algorithm(basic_algorithm):
     def going_through_epochs_and_training(self):
         self.exploration_before_first_epoch()
 
-        print(self.start_epoch, self.num_epoch)
         for epoch in range(self.start_epoch, self.num_epoch):
             print("--epoch %d--" % (epoch+1))
             print("--epoch %d, evaluation--" % (epoch+1))
